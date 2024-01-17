@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Proyectos</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="/css/estilos-footer.css" rel="stylesheet" type="text/css"/>
+    </head>
+    <body>
+        <nav id = "menu" class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div th:include="paginas/reutilizable/navbar.html" th:remove="tag"></div>
+        </nav>
+        <div class="container mt-4" id="container_mensages">
+            <div class="alert alert-success alert-dismissable fade show" th:if="${success != null}">
+                <label th:text="${success}" class="label_mensaje"></label>
+            </div>
+            <div class="alert alert-danger alert-dismissable" th:if="${error != null}">
+                <label th:text="${error}" class="label_mensaje"></label>
+            </div>
+        </div>
+        <div class="container mt-3">
+            <h2>Registro de Proyectos</h2>
+        </div>
+        <div class="container mt-5">
+            <form th:action="@{/guardarProyecto}" action="#" th:object="${proyecto}" method="POST" class="form-control">
+                <div class="form-group mt-4">
+                    <label for="nombreLider validationDefault01" class="form-label">Lider</label>
+                    <input type="text" class="form-control" id="nombreLider validationDefault01" th:field="*{nombreLider}" name="nombreLider"required>
+                </div>
+                <input type="hidden" th:field="*{idProyecto}" name="idProyecto" id="idProyecto">
+                <input type="hidden" th:field="*{calificacionProfesional}" name="calificacionProfesional" id="calificacionProfesional">
+                <input type="hidden" th:field="*{calificacionTecnico}" name="calificacionTecnico" id="calificacionTecnico">
+                <input type="hidden" th:field="*{calificacionGeneral}" name="calificacionGeneral" id="calificacionGeneral">
+                <div class="form-group">
+                    <label for="observasiones validationDefault02" class="form-label">Identidad</label>
+                    <input type="number" min="0" class="form-control" id="identidadLider validationDefault02" th:field="*{identidadLider}" name="identidadLider" required>
+                </div>
+                <div class="form-group">
+                    <label for="titulo validationDefault03" class="form-label">Titulo Proyecto</label>
+                    <input type="text" class="form-control" id="titulo validationDefault03" th:field="*{titulo}" name="titulo" required>
+                </div>
+                <div class="form-group">
+                    <label for="idDepartamento" class="form-label">Departamento</label>
+                    <select class="form-select" id="validationCustom04" required aria-label="Default select example" th:field="*{idDepartamento}">
+                        <option th:if="${listaDepartamentos.isEmpty()}" th:value="0">No hay departamentos</option>
+                        <option th:!if="${listaDepartamentos.isEmpty()}" th:each="departamento : ${listaDepartamentos}" th:value="${departamento.idDepartamento}" th:text="${departamento.nombre}" name="idDepartamento"></option>
+                    </select>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-4">
+                        <label for="idPlantillaProfesional" class="form-label">Plantilla Coordinador Profesional</label>
+                        <input class="form-control" id="idPlantillaProfesional validationDefault03" th:field="*{idPlantillaProfesional}" name="idPlantillaProfesional" required list="plantillaProfesional">
+                        <datalist id="plantillaProfesional">
+                            <option th:if="${listaPlantillaProfesional.isEmpty()}" th:value="0">No hay plantillas</option>
+                            <option th:!if="${listaPlantillaProfesional.isEmpty()}" th:each="profesional : ${listaPlantillaProfesional}" th:value="${profesional.idPlantilla}" th:text="${profesional.titulo}" name="idPlantillaProfesional"></option>
+                        </datalist>
+                    </div>
+                    <div class="col-4">
+                        <label for="idPlantillaTecnico" class="form-label">Plantilla Coordinador Tecnico</label>
+                        <input class="form-control" id="idPlantillaTecnico validationDefault03" th:field="*{idPlantillaTecnico}" name="idPlantillaTecnico" required list="plantillaTecnico">
+                        <datalist id="plantillaTecnico">
+                            <option th:if="${listaPlantillaTecnico.isEmpty()}" th:value="0">No hay plantillas</option>
+                            <option th:!if="${listaPlantillaTecnico.isEmpty()}" th:each="tecnico : ${listaPlantillaTecnico}" th:value="${tecnico.idPlantilla}" th:text="${tecnico.titulo}" name="idPlantillaTecnico"></option>
+                        </datalist>
+                    </div>
+                    <div class="col-4 mb-4">
+                        <label for="idPlantillaGeneral" class="form-label">Plantilla Coordinador General</label>
+                        <input class="form-control" id="idPlantillaGeneral validationDefault03" th:field="*{idPlantillaGeneral}" name="idPlantillaGeneral" required list="plantillaGeneral">
+                        <datalist id="plantillaGeneral">
+                            <option th:if="${listaPlantillaGeneral.isEmpty()}" th:value="0">No hay plantillas</option>
+                            <option th:!if="${listaPlantillaGeneral.isEmpty()}" th:each="general : ${listaPlantillaGeneral}" th:value="${general.idPlantilla}" th:text="${general.titulo}" name="idPlantillaGeneral"></option>
+                        </datalist>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                <a href="/mantenimientoProyecto" class="btn btn-warning">Ir a Mantenimiento</a>
+            </form>
+
+        </div>
+        <br>
+        <br>
+        <br>        
+         <div th:include="paginas/reutilizable/footer.html"></div>                
+        <script src="/js/alerta.js" type="text/javascript"></script>
+        <script src="/js/bootstrap.min.js" type="text/javascript"></script>
+    </body>
+</html>

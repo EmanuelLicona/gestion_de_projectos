@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Departamentos</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" type="text/css"/>
+        <link href="/css/estilos-footer.css" rel="stylesheet" type="text/css"/>
+    </head>
+    <body>
+        <nav id = "menu" class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div th:include="paginas/reutilizable/navbar.html" th:remove="tag"></div>
+        </nav>
+        <div class="container">
+            <h1>Departamentos</h1>
+        </div>
+
+        <div class="container">
+            <div class="container" id="container_mensages">
+                <!--MENSAJES-->
+                <div class="alert alert-success alert-dismissable fade show" th:if="${success != null}">
+                    <label th:text="${success}" class="label_mensaje"></label>
+                </div>
+                <div class="alert alert-danger alert-dismissable" th:if="${error != null}">
+                    <label th:text="${error}" class="label_mensaje"></label>
+                </div>
+            </div>
+
+            <form action="#" th:action="@{/guardar_departamento}" th:object="${departamento}" method="post" class="form-control">
+                <div class="form-group">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" id="nombre" th:field="*{nombre}" name="nombre" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="descripcion validationDefault01" class="form-label">Descripcion</label>
+                    <textarea class="form-control" id="descripcion validationDefault01" rows="3" cols="25" th:field="*{descripcion}" name="descripcion" required></textarea>
+                </div>
+                <input type="hidden" th:field="*{idDepartamento}" name="idDepartamento" id="idDepartamento">
+                <div class="col-md-12 mb-3">
+                    <label for="estado" class="form-label">Estado</label>
+                    <select class="form-select" id="validationCustom04" required aria-label="Default select example" th:field="*{estado}">
+                        <option th:field="*{estado}" th:value="Activo" name="estado" id="estado">Activo</option>
+                        <option th:field="*{estado}" th:value="Inactivo" name="estado" id="estado">Inactivo</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-success">Guardar</button>
+                <a  href="/mantenimientoDepartamento" class="btn btn-warning">Ir a mantenimiento</a>
+            </form>
+        </div>
+        <br>
+        <br>
+        <br>
+         <div th:include="paginas/reutilizable/footer.html"></div>
+        <script src="/js/alerta.js" type="text/javascript"></script>
+        <script th:src="@{/js/bootstrap.min.js}" type="text/javascript"></script>
+    </body>
+</html>

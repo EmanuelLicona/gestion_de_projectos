@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Proyectos</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="/css/estilos-footer.css" rel="stylesheet" type="text/css"/>
+    </head>
+    <body>
+        <nav id = "menu" class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div th:include="paginas/reutilizable/navbar.html" th:remove="tag"></div>
+        </nav>
+        <div class="container mt-4" id="container_mensages">
+            <div class="alert alert-success alert-dismissable fade show" th:if="${success != null}">
+                <label th:text="${success}" class="label_mensaje"></label>
+            </div>
+            <div class="alert alert-danger alert-dismissable" th:if="${error != null}">
+                <label th:text="${error}" class="label_mensaje"></label>
+            </div>
+        </div>
+        <div class="container mt-3">
+            <h2>Registro de Coordinadores</h2>
+        </div>
+        <div class="container mt-5 py-2 border">
+            <form th:action="@{/guardarCoordinadores}" action="#" th:object="${proyecto}" method="POST" class="row g-3">
+                <div class="col-md-4 position-relative">
+                    <label for="idUsuario1" class="form-label">Coordinador Profesional</label>
+                    <select class="form-select" id="validationCustom04" required aria-label="Default select example" th:field="*{idUsuario1}">
+                        <option th:if="${listaUsuario.isEmpty()}" th:value="0">No hay usuarios</option>
+                        <option th:!if="${listaUsuario.isEmpty()}" th:each="usuario : ${listaUsuario}" th:value="${usuario.id_usuario}" th:text="${usuario.nombres+' '+usuario.apellidos}" name="idUsuario1"></option>
+                    </select>
+                    <select class="form-select" style="visibility:hidden" id="validationCustom04" required aria-label="Default select example" th:field="*{idCoordinadorProfesional}">
+                        <option type="hidden" th:each="coordinador : ${listaCoordinadorP}" th:value="${coordinador.idTipoCoordinador}" th:text="${coordinador.idTipoCoordinador}" name="idCoordinadorProfesional"></option>
+                    </select>
+                </div>
+                <div class="col-md-4 position-relative">
+                    <label for="idUsuario2" class="form-label">Coordinador Tecnico</label>
+                    <select class="form-select" id="validationCustom04" required aria-label="Default select example" th:field="*{idUsuario2}">
+                        <option th:if="${listaUsuario.isEmpty()}" th:value="0">No hay usuarios</option>
+                        <option th:!if="${listaUsuario.isEmpty()}" th:each="usuario : ${listaUsuario}" th:value="${usuario.id_usuario}" th:text="${usuario.nombres+' '+usuario.apellidos}" name="idUsuario2"></option>
+                    </select>
+                    <select class="form-select" style="visibility:hidden" id="validationCustom04" required aria-label="Default select example" th:field="*{idCoordinadorTecnico}">
+                        <option type="hidden" th:each="coordinador2 : ${listaCoordinadorT}" th:value="${coordinador2.idTipoCoordinador}" th:text="${coordinador2.idTipoCoordinador}" name="idCoordinadorTecnico"></option>
+                    </select>
+                </div>
+                <div class="col-md-4 position-relative">
+                    <label for="idUsuario3" class="form-label">Coordinador General</label>
+                    <select class="form-select" id="validationCustom04" required aria-label="Default select example" th:field="*{idUsuario3}">
+                        <option th:if="${listaUsuario.isEmpty()}" th:value="0">No hay usuarios</option>
+                        <option th:!if="${listaUsuario.isEmpty()}" th:each="usuario : ${listaUsuario}" th:value="${usuario.id_usuario}" th:text="${usuario.nombres+' '+usuario.apellidos}" name="idUsuario3"></option>
+                    </select>
+                    <select class="form-select" style="visibility:hidden" id="validationCustom04" required aria-label="Default select example" th:field="*{idCoordinadorGeneral}">
+                        <option type="hidden" th:each="coordinador3 : ${listaCoordinadorG}" th:value="${coordinador3.idTipoCoordinador}" th:text="${coordinador3.idTipoCoordinador}" name="idCoordinadorGeneral"></option>
+                    </select>
+                </div>
+                <div th:if="${editMode}">
+                    <div class="col-md-12">
+                        <label for="justificacion" class="form-label">Justificacion</label>
+                        <textarea class="form-control" id="justificacion" rows="3" cols="25" th:field="*{justificacion}" name="justificacion"></textarea>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <button type="submit" class="btn btn-success">Guardar</button>
+                    <a href="/mantenimientoProyectoCoord" class="btn btn-warning">Ir a Mantenimiento</a>
+                </div>
+            </form>
+        </div>
+        <br>
+        <br>
+        <br>        
+         <div th:include="paginas/reutilizable/footer.html"></div>                
+        <script src="/js/alerta.js" type="text/javascript"></script>
+        <script src="/js/bootstrap.min.js" type="text/javascript"></script>
+    </body>
+</html>

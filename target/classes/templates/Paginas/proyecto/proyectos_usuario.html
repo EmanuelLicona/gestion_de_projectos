@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Proyectos</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="/css/estilos-footer.css" rel="stylesheet" type="text/css"/>
+    </head>
+    <body>
+        <nav id = "menu" class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div th:include="paginas/reutilizable/navbar.html" th:remove="tag"></div>
+        </nav>
+        <div class="container mt-4" id="container_mensages">
+            <div class="alert alert-success alert-dismissable fade show" th:if="${success != null}">
+                <label th:text="${success}" class="label_mensaje"></label>
+            </div>
+            <div class="alert alert-danger alert-dismissable" th:if="${error != null}">
+                <label th:text="${error}" class="label_mensaje"></label>
+            </div>
+        </div>
+        <div class="container mt-3">
+            <h2>Proyectos Actuales</h2>
+        </div>
+        <div class="container mt-5">
+            <h2 th:if="${listaProyectos.isEmpty()}">No tiene proyectos asignados</h2>
+            <div class="container" th:if="${!listaProyectos.isEmpty()}">
+                <div class="table-responsive">
+                    <table class="table table-light table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">Id</th>
+                                <th scope="col">Lider</th>
+                                <th scope="col">Titulo Proyecto</th>
+                                <th scope="col">Departamento</th>
+                                <th scope="col">Cargo</th>
+                                <th scope="col">Estado</th>
+                                <th scope="col"></th>
+                                <th scope="col">Acciones</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="proyecto : ${listaProyectos}">
+                                <td th:text="${proyecto.idProyecto.idProyecto}"></td>
+                                <td th:text="${proyecto.idProyecto.nombreLider}"></td>
+                                <td th:text="${proyecto.idProyecto.titulo}"></td>
+                                <td th:text="${proyecto.idProyecto.idDepartamento.nombre}"></td>
+                                <td th:text="${proyecto.idTipoCoordinador.nombre}"></td>
+                                <td th:text="${proyecto.idProyecto.estado}"></td>
+
+                                <td>
+                                    <a th:if="${proyecto.idTipoCoordinador.nombre == 'Coordinador Profesional'}" class="btn btn-success" th:href="@{/coordinadorProfesional/{id} (id=${proyecto.idProyecto.idProyecto})}">Supervizar(PRO)</a>
+                                    <a th:if="${proyecto.idTipoCoordinador.nombre == 'Coordinador Tecnico'}" class="btn btn-success" th:href="@{/coordinadorTecnico/{id} (id=${proyecto.idProyecto.idProyecto})}">Supervizar (TEC)</a>
+                                </td>
+                                <td>  
+                                    <a th:href="@{/calificar/{id} (id=${proyecto.idProyecto.idProyecto})}" class="btn btn-info">Calificar</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div> 
+            </div>
+        </div>
+        <br>
+        <br>
+        <br>        
+         <div th:include="paginas/reutilizable/footer.html"></div>        
+        <script src="/js/alerta.js" type="text/javascript"></script>
+        <script src="/js/bootstrap.min.js" type="text/javascript"></script>
+    </body>
+</html>

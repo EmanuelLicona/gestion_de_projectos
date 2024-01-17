@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Calificacion</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" type="text/css"/>
+        <link href="/css/estilos-footer.css" rel="stylesheet" type="text/css"/>
+    </head>
+    <body>
+
+        <nav id = "menu" class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div th:include="paginas/reutilizable/navbar.html" th:remove="tag"></div>
+        </nav>
+
+        <div class="container">
+            <h1>Calificacion del criterio</h1>
+        </div>
+
+        <div class="container mt-4" id="container_mensages">
+            <div class="alert alert-success alert-dismissable fade show" th:if="${success != null}">
+                <label th:text="${success}" class="label_mensaje"></label>
+            </div>
+            <div class="alert alert-danger alert-dismissable" th:if="${error != null}">
+                <label th:text="${error}" class="label_mensaje"></label>
+            </div>
+        </div>
+
+        <div class="container mt-5 border">
+            <form class="row g-3" th:action="@{/guardar_evaluacionCriterio}" th:object="${evaluacionCriterio}" method="post">
+                
+                <input type="hidden" th:field="*{id}" name="id" id="id">
+                <input type="hidden" th:field="*{idCriterio}" name="idCriterio" id="idCriterio">
+                <input type="hidden" th:field="*{idPlantilla}" name="idPlantilla" id="idPlantilla">
+                <input type="hidden" th:field="*{idProyecto}" name="idProyecto" id="idProyecto">
+                <!--<input type="hidden" th:field="*{fecha}" name="fecha" id="fecha">-->
+                <input type="hidden" th:field="*{idUsuario}" name="idUsuario" id="idUsuario">
+
+                <div class="col-md-12">
+                    <label class="form-label" for="descripcion">Descripcion</label>
+                    <textarea class="form-control" th:text="${evaluacionCriterio.idCriterio.descripcion}" name="descripcion" id="descripcion" rows="3" cols="25" disabled></textarea>
+                </div>
+
+
+
+                <div class="col-md-12 mt-4">
+                    <label for="punt_maximo" class="form-label">Puntaje Maximo</label>
+                    <input type="number" id="punt_maximo" th:value="${evaluacionCriterio.idCriterio.punt_maximo}" name="punt_maximo" class="form-control" disabled>
+                </div>
+
+
+
+                <div class="col-md-12 mt-4">
+                    <label for="punt_minimo" class="form-label">Puntaje Minimo</label>
+                    <input type="number" id="punt_minimo" th:value="${evaluacionCriterio.idCriterio.punt_minimo}" class="form-control" disabled>
+                </div>
+
+                <div class="col-md-12 mt-4">
+                    <label for="punt_minimo" class="form-label">Calificacion</label>
+                    <input type="number" id="punt_minimo" th:field="*{calificacion}" name="calificacion" class="form-control" required>
+                </div>
+
+
+
+                <div class=" mb-3">
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    <a th:href="@{/calificar/{id} (id=${evaluacionCriterio.idProyecto.idProyecto})}" class="btn btn-warning">Volver</a>
+                </div>
+            </form>
+        </div>
+        <br>
+        <br>
+        <br>        
+         <div th:include="paginas/reutilizable/footer.html"></div>        
+        <script src="/js/alerta.js" type="text/javascript"></script>
+        <script th:src="@{/js/bootstrap.min.js}" type="text/javascript"></script>
+    </body>
+</html>

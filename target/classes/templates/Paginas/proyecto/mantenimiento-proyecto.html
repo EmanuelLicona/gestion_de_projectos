@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Proyectos</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="/css/estilos-footer.css" rel="stylesheet" type="text/css"/>
+    </head>
+    <body>
+        <nav id = "menu" class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div th:include="paginas/reutilizable/navbar.html" th:remove="tag"></div>
+        </nav>
+        <div class="container mt-4" id="container_mensages">
+            <div class="alert alert-success alert-dismissable fade show" th:if="${success != null}">
+                <label th:text="${success}" class="label_mensaje"></label>
+            </div>
+            <div class="alert alert-danger alert-dismissable" th:if="${error != null}">
+                <label th:text="${error}" class="label_mensaje"></label>
+            </div>
+        </div>
+        <div class="container mt-3">
+            <h2>Mantenimiendo de Proyectos</h2>
+        </div>
+        <div class="container mt-5">
+            <form th:action="@{/busquedaProyecto}" th:object="${buscarTitulo}" method="get" >
+                <h5>Buscar Proyecto</h5>
+                <div class="col-md-4 my-3">
+                    <input type="text" th:field="*{titulo}" name="titulo" class="form-control col-md-4">
+                </div>
+                <button type="submit" class="btn btn-success mb-4">Buscar</button>
+            </form>
+            <div class="table-responsive">
+                <table class="table table-light table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Lider</th>
+                            <th scope="col">Identidad Lider</th>
+                            <th scope="col">Titulo Proyecto</th>
+                            <th scope="col">Departamento</th>
+                            <th scope="col">Plantilla C. Profesional</th>
+                            <th scope="col">Plantilla C. Tecnico</th>
+                            <th scope="col">Plantilla C. General</th>
+                            <th scope="col">Estado</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="proyecto : ${listaProyecto}">
+                            <td th:text="${proyecto.idProyecto}"></td>
+                            <td th:text="${proyecto.nombreLider}"></td>
+                            <td th:text="${proyecto.identidadLider}"></td>
+                            <td th:text="${proyecto.titulo}"></td>
+                            <td th:text="${proyecto.idDepartamento.nombre}"></td>
+                            <td th:text="${proyecto.idPlantillaProfesional.titulo}"></td>
+                            <td th:text="${proyecto.idPlantillaTecnico.titulo}"></td>
+                            <td th:text="${proyecto.idPlantillaGeneral.titulo}"></td>
+                            <td th:text="${proyecto.estado}"></td>
+                            <td>
+                                <a class="btn btn-warning" th:href="@{/actualizarProyecto/{id} (id=${proyecto.idProyecto})}">Actualizar</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div> 
+        </div>
+        <br>
+        <br>
+        <br>        
+         <div th:include="paginas/reutilizable/footer.html"></div>                
+        <script src="/js/alerta.js" type="text/javascript"></script>
+        <script src="/js/bootstrap.min.js" type="text/javascript"></script>
+    </body>
+</html>

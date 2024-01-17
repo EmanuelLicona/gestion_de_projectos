@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Reportes</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="/css/estilos-footer.css" rel="stylesheet" type="text/css"/>
+    </head>
+    <body>
+        <nav id = "menu" class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div th:include="paginas/reutilizable/navbar.html" th:remove="tag"></div>
+        </nav>
+        <div class="container mt-4">
+            <h5>Reportes - Requisitos de Informacion</h5>
+        </div>
+        <div class="container mt-5">
+            <div class="table-responsive">
+                <table class="table table-light table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Requisito</th>
+                            <th scope="col">Accion</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1.-</td>
+                            <td>Se necesita identificar la cantidad de proyectos pendientes de finalización.</td>
+                            <td><a target="_BLANK" class="btn btn-warning" href="https://public.tableau.com/views/Reporte1-Proyectos-Pendientes/Proyectos-Activos?:language=en&:display_count=y&publish=yes&:origin=viz_share_link">Ver Reporte</a></td>
+                        </tr>
+                        <tr>
+                            <td>2.-</td>
+                            <td>Se necesita identificar el listado de proyectos pendientes de calificación.</td>
+                            <td><a target="_BLANK" class="btn btn-warning" href="https://public.tableau.com/views/Proyectos-Pendientes-Calificar/Proyectos-Penditentes-Calificar?:language=es&:display_count=y&:origin=viz_share_link">Ver Reporte</a></td>
+                        </tr>
+                        <tr>
+                            <td>3.-</td>
+                            <td> Se necesita un listado de los coordinadores y la sumatoria de roles que ha tenido por 
+                                proyectos a lo largo de la historia.</td>
+                            <td><a target="_BLANK" class="btn btn-warning" href="https://public.tableau.com/views/Reporte2-SumatoriaRoles/Sumatoria-Roles?:language=en&:display_count=y&publish=yes&:origin=viz_share_link">Ver Reporte</a></td>
+                        </tr>
+                        <tr>
+                            <td>4.-</td>
+                            <td>Se necesita un comparativo anual de promedio de calificación de proyectos por 
+                                departamento.</td>
+                            <td><a target="_BLANK" class="btn btn-warning" href="https://public.tableau.com/views/Reporte4-CalificacionesPorDepartamento/Calificaciones-Departamento?:language=es&:display_count=y&:origin=viz_share_link">Ver Reporte</a></td>
+                        </tr>
+                        <tr>
+                            <td>5.-</td>
+                            <td>Se necesita un comparativo anual de proyectos finalizados por coordinador.</td>
+                            <td><a target="_BLANK" class="btn btn-warning" href="https://public.tableau.com/views/Proyectos-Finalizados-Coordinador/Proy-Finalizados-Coordinador?:language=en&:display_count=y&publish=yes&:origin=viz_share_link" >Ver Reporte</a></td>
+                        </tr>
+                        <tr>
+                            <td>6.-</td>
+                            <td>Se necesita un comparativo anual de proyectos mayores o iguales de 70 y menores de 70.</td>
+                            <td><a target="_BLANK" class="btn btn-warning" href="https://public.tableau.com/views/Dashboard-Reporte6/Proyectos-Sum-Calificaciones?:language=es&:display_count=y&:origin=viz_share_link">Ver Reporte</a></td>
+                        </tr>
+                        <tr>
+                            <td>7.-</td>
+                            <td>Se necesita un promedio de revisiones por mes y departamento.</td>
+                            <td><a target="_BLANK" class="btn btn-warning" href="https://public.tableau.com/views/Supervisiones-Mes-Depto-Prom/Supervisiones-Mes-Depto?:language=en&:display_count=y&publish=yes&:origin=viz_share_link" >Ver Reporte</a></td>
+                        </tr>
+                        <tr>
+                            <td>8.-</td>
+                            <td>Se necesita un top 10 de los proyectos mejores calificados</td>
+                            <td><a target="_BLANK" class="btn btn-warning" href="https://public.tableau.com/views/Reporte8-ProyectosMejorCalificados/Proyectos-Top10?:language=es&:display_count=y&:origin=viz_share_link" >Ver Reporte</a></td>
+                        </tr>
+                        <tr>
+                            <td>9.-</td>
+                            <td> Se necesita un top 10 de los proyectos terminados en el menor tiempo posible (tiempo 
+                                transcurrido entre la revisión 1 y la calificación del ultimo asesor profesional y técnico).</td>
+                            <td><a target="_BLANK" class="btn btn-warning" href="https://public.tableau.com/views/Reporte9-Top10Proyectos/Hoja1?:language=es&:display_count=y&:origin=viz_share_link">Ver Reporte</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div> 
+        </div>
+        <br>
+        <br>
+        <br>        
+         <div th:include="paginas/reutilizable/footer.html"></div>
+        <script src="/js/bootstrap.min.js" type="text/javascript"></script>
+    </body>
+</html>

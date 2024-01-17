@@ -1,0 +1,139 @@
+<html>
+    <head> 
+        <title>Reporte Calificacion</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" type="text/css"/>
+        <link th:href="@{/css/estilo-plantilla-supervision.css}" rel="stylesheet" type="text/css"/>
+        <link href="/css/estilos-footer.css" rel="stylesheet" type="text/css"/>
+    </head>
+</head>
+<body>
+    <nav id = "menu" class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div th:include="paginas/reutilizable/navbar.html" th:remove="tag"></div>
+    </nav>
+
+    <div class="container mt-2 contenedor-boton">
+        <button class="btn btn-info" onclick="print()">Imprimir Reporte</button>
+    </div>
+
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-4 text-center align-items-center icono">
+                <i class="fas fa-building pt-3"></i>
+            </div>
+            <div class="col-4 text-center titulo">
+                <h4>Fsociety</h4>
+                <h5>Evaluacion De Proyecto</h5>
+                <h6 th:if="${coordinador.nombre=='Coordinador Profesional'}" th:text="${'Coordinador: '+coordinadorP.nombres+' '+coordinadorP.apellidos+' (Profesional) '}"></h6>
+                <h6 th:if="${coordinador.nombre=='Coordinador Tecnico'}" th:text="${'Coordinador: '+coordinadorP.nombres+' '+coordinadorP.apellidos+' (Tecnico) '}"></h6>
+                <h6 th:if="${coordinador.nombre=='Coordinador General'}" th:text="${'Coordinador: '+coordinadorP.nombres+' '+coordinadorP.apellidos+' (General) '}"></h6>
+            </div>
+            <div class="col-4 text-center">
+                <h5 th:text="${'Fecha: '+valoresProyecto.fechaCalificacionReporte}"></h5>
+                <h5 th:text="${'Código: '+valoresProyecto.idProyecto}"></h5>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-2 contenedor">
+        <div class="text-center my-4">
+            <h5>Evaluaci&oacute;n final del proyecto</h5>
+        </div>
+    </div>
+    <div class="mt-4">
+        <div class=" text-center">
+            <div class="text-center my-4">
+                <h4>______________________________________________</h4>
+                <div>
+                    <label>Nombre Lider</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-2 contenedor">
+        <div class="row">
+            <div class="col-6 text-start">
+                <label for="" th:text="${'Departamento: '+valoresProyecto.idDepartamento.nombre}"></label>
+            </div>
+            <div class="col-6 text-end">
+                <label for="" th:text="${'Identidad: '+valoresProyecto.identidadLider}"></label>
+            </div>
+        </div>
+
+    </div>
+
+    <div class=" container mt-4">
+        <div class=" text-center">
+            <div class="text-center my-4">
+                <h4>______________________________________________</h4>
+                <div>
+                    <label>Nombre Coordinador</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <table class="table table-bordered border-primary">
+            <thead>
+                <tr>
+                    <th>Criterios a evaluar</th>
+                    <th>Punt. Max</th>
+                    <th>Calificaci&oacute;n</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="calificacion : ${listadoCalificacion}">
+                    <td><label th:text="${calificacion.idCriterio.descripcion}"></label></td>
+                    <td><label th:text="${calificacion.idCriterio.punt_maximo}"></label></td>
+                    <td><label th:text="${calificacion.calificacion}"></label></td>
+                </tr>
+
+
+                <tr>
+                    <td colspan="2" class="text-lg-end">Total</td>
+                    <td th:if="${coordinador.nombre=='Coordinador Profesional'}" th:text="${valoresProyecto.calificacionProfesional+' '+' (60% - 100%)'}"></td>
+                    <td th:if="${coordinador.nombre=='Coordinador Tecnico'}" th:text="${valoresProyecto.calificacionTecnico+' '+' (30% - 100%)'}"></td>
+                    <td th:if="${coordinador.nombre=='Coordinador General'}" th:text="${valoresProyecto.calificacionGeneral+' '+' (10% - 100%)'}"></td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+
+    <div class="container mt-2 contenedor">
+        <div class="text my-4">
+            <h6>Nota: no deber&aacute; exceder la cantidad de puntos por coordinador</h6>
+        </div>
+    </div>
+
+    <div class="container mt2 contenedor">
+        <div>
+            <label for="" th:text="${'Tegucigalpa, '}"></label>
+        </div>
+    </div>
+    <div class="container mt-4">
+        <div class="row text-center">
+            <div class="col-6 mt-4">
+                <img th:src="@{/imagenes/firma.png}" alt="firma">
+                <div>
+                    <label for="">Firma Coordinador</label>
+                </div>
+            </div>
+            <div class="col-6 mt-4">
+                <img th:src="@{/imagenes/firma.png}" alt="firma">
+                <div>
+                    <label for="">Firma Adminstrador</label>
+                </div>
+            </div>
+        </div>
+    </div>
+        <br>
+        <br>
+        <br>        
+     <div th:include="paginas/reutilizable/footer.html"></div>
+    <script th:src="@{/js/bootstrap.min.js}" type="text/javascript"></script>
+    <script src="https://kit.fontawesome.com/ca3a14e872.js" crossorigin="anonymous"></script>
+
+</body>
+</html>
